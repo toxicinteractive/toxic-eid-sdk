@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
     }
 
     // [HttpPost]
-    // public async Task<ActionResult<GetSessionResponse>> Callback(string sessionId)
+    // public async Task<ActionResult<GetSessionResponse>> Callback(string grandidsession)
     // {
         
     // }
