@@ -1,0 +1,29 @@
+{
+  "name": "toxic-bankid-client-aspnet",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+  "features": {
+    "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:latest": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "ms-dotnettools.csdevkit",
+        "dnegstad.devcontainer-dev-certs-remote",
+        "EditorConfig.EditorConfig"
+      ],
+
+      "settings": {
+        "csharp.experimental.debug.hotReload": true,
+        "remote.autoForwardPorts": true,
+        "remote.autoForwardPortsSource": "hybrid",
+        "dotnet.defaultSolution": "Toxic.BankId.Client.AspNet.slnx"
+      }
+    }
+  },
+  "remoteEnv": {
+    "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true",
+    "DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER": "true",
+    "TZ": "Europe/Stockholm"
+  }
+}

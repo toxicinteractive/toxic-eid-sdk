@@ -1,0 +1,19 @@
+info:
+  name: FederatedLogin
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/FederatedLogin"
+  headers:
+    - name: apiKey
+      value: "{{api-key}}"
+    - name: authenticateServiceKey
+      value: "{{service-key}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

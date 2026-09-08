@@ -1,0 +1,10 @@
+name: test
+variables:
+  - name: url
+    value: https://client-test.grandid.com/json1.1
+  - secret: true
+    name: api-key
+    description: ""
+  - secret: true
+    name: service-key
+    description: ""

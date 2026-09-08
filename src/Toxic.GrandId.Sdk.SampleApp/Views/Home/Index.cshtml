@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="center">
+  <div class="col2">
+    <fieldset>
+      <legend>Authenticate options</legend>
+      <label for="authMessage">authMessage</label><br />
+      <input type="text" id="authMessage" value="Log in to the site" />
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>Sign options</legend>
+      <label for="userVisibleData">userVisibleData</label><br />
+      <textarea id="userVisibleData">I'm signing for...</textarea><br />
+      <label for="userNonVisibleData">userNonVisibleData</label><br />
+      <input type="text" id="userNonVisibleData" value="Sign state" /><br />
+      <label for="userVisibleDataFormat">userVisibleDataFormat</label><br />
+      <select id="userVisibleDataFormat">
+        <option value="plaintext">plaintext</option>
+        <option value="simpleMarkdownV1">simpleMarkdownV1</option>
+      </select>
+    </fieldset>
+  </div>
+  <div class="col1">
+    <fieldset>
+      <legend>Gui options</legend>
+      <label for="useGui"><input type="checkbox" id="useGui" value="useGui" />useGui</label><br />
+      <label for="allowQrCode"><input type="checkbox" id="allowQrCode" value="allowQrCode" />allowQrCode</label><br />
+      <label for="allowFingerPrintAuth"><input type="checkbox" id="allowFingerPrintAuth" value="allowFingerPrintAuth" />allowFingerPrintAuth</label><br />
+      <label for="allowFingerPrintSign"><input type="checkbox" id="allowFingerPrintSign" value="allowFingerPrintSign" />allowFingerPrintSign</label><br />
+      <label for="callbackUrl">callbackUrl</label><br />
+      <input type="text" id="callbackUrl" value="https://localhost:7271/auth/callback" />
+    </fieldset>
+    <br />
+    <fieldset>
+      <legend>BankId app options</legend>
+      <label for="returnUrl">returnUrl</label><br />
+      <input type="text" id="returnUrl" value="https://localhost:7271/" />
+    </fieldset>
+  </div>
+  <fieldset>
+    <legend>Device mode</legend>
+    <label for="otherDevice"><input type="radio" id="otherDevice" name="deviceMode" value="otherDevice" />otherDevice</label><br />
+    <label for="sameDevice"><input type="radio" id="sameDevice" name="deviceMode" value="sameDevice" />sameDevice</label><br />
+  </fieldset>
+  <br />
+  <button id="authenticate">Authenticate with BankId</button>
+  <button id="sign">Sign with BankId</button>
+</div>

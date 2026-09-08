@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:latest": {
+      "version": "1.4.0",
+      "resolved": "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs@sha256:02b6a9115aacb493917b1f20b18efd8074dcacd8d4301c321f54fbf14db09ea3",
+      "integrity": "sha256:02b6a9115aacb493917b1f20b18efd8074dcacd8d4301c321f54fbf14db09ea3"
+    }
+  }
+}
