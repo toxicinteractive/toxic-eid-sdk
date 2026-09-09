@@ -6,11 +6,15 @@ info:
 http:
   method: POST
   url: "{{url}}/FederatedLogin"
-  headers:
-    - name: apiKey
-      value: "{{api-key}}"
-    - name: authenticateServiceKey
-      value: "{{service-key}}"
+  body:
+    type: multipart-form
+    data:
+      - name: apiKey
+        type: text
+        value: "{{api-key}}"
+      - name: authenticateServiceKey
+        type: text
+        value: "{{service-key}}"
 
 settings:
   encodeUrl: true

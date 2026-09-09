@@ -5,7 +5,7 @@ info:
 
 http:
   method: POST
-  url: "{{url}}/GetSession"
+  url: "{{url}}/Logout"
   body:
     type: multipart-form
     data:
