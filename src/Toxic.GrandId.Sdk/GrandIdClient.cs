@@ -1,5 +1,5 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Toxic.GrandId.Sdk.Features;
 
 namespace Toxic.GrandId.Sdk;
@@ -8,22 +8,27 @@ public abstract partial class GrandIdClient
 {
     private readonly HttpClient _httpClient;
     private readonly GrandIdOptions _options;
+    private readonly ILogger<GrandIdClient> _logger;
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
 
-    public GrandIdClient(HttpClient httpClient, GrandIdOptions options)
+    public GrandIdClient(HttpClient httpClient, GrandIdOptions options, ILogger<GrandIdClient> logger)
     {
         _httpClient = httpClient;
         _options = options;
+        _logger = logger;
     }
 
     public virtual partial Task<Features.FederatedLogin.FederatedLoginResponse> FederatedLogin(
-        bool useGui,
-        bool allowQrCode,
+        bool gui,
+        bool qr,
         bool allowFingerPrintAuth,
         bool allowFingerPrintSign,
+        bool mobileBankId,
+        bool desktopBankId,
+        bool thisDevice,
         string? callbackUrl = null,
         string? returnUrl = null,
         string? authMessage = null,
@@ -41,11 +46,12 @@ public abstract partial class GrandIdClient
             endpoint, 
             new FormUrlEncodedContent(request.ToFormParameters()));
 
-        var responseObj = await httpResponse
-            .Content
-            .ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
+        var contents = await httpResponse.Content.ReadAsStringAsync();
+        _logger.LogDebug("Raw response from {Endpoint}: {Message}", endpoint, contents);
+        
+        var responseObj = JsonSerializer.Deserialize<TResponse>(contents, _jsonSerializerOptions);
 
-        if (!httpResponse.IsSuccessStatusCode || responseObj == null || responseObj.IsError)
+        if (!httpResponse.IsSuccessStatusCode || responseObj == null || responseObj.HasError)
         {
             throw new GrandIdException(
                 responseObj?.ErrorObject?.Message ?? "Unknown error", 

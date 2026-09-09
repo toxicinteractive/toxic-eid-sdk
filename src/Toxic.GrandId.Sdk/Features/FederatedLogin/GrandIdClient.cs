@@ -5,10 +5,13 @@ namespace Toxic.GrandId.Sdk;
 public abstract partial class GrandIdClient
 {
     public virtual async partial Task<Models.FederatedLoginResponse> FederatedLogin(
-        bool useGui,
-        bool allowQrCode,
+        bool gui,
+        bool qr,
         bool allowFingerPrintAuth,
         bool allowFingerPrintSign,
+        bool mobileBankId,
+        bool desktopBankId,
+        bool thisDevice,
         string? callbackUrl,
         string? returnUrl,
         string? authMessage,
@@ -18,10 +21,13 @@ public abstract partial class GrandIdClient
     {
         var request = GetRequestObject<Models.GrandIdRequest>();
 
-        request.Gui = useGui;
-        request.Qr = allowQrCode;
+        request.Gui = gui;
+        request.Qr = qr;
         request.AllowFingerprintAuth = allowFingerPrintAuth;
         request.AllowFingerprintSign = allowFingerPrintSign;
+        request.MobileBankId = mobileBankId;
+        request.DesktopBankId = desktopBankId;
+        request.ThisDevice = thisDevice;
         request.CallbackUrl = callbackUrl;
         request.ReturnUrl = returnUrl;
         request.AuthMessage = authMessage;

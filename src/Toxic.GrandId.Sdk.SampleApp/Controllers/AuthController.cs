@@ -20,10 +20,13 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<FederatedLoginResponse>> CreateSession(CreateSessionRequest request)
     {
         var response = await _bankIdClient.FederatedLogin(
-            request.UseGui,
-            request.AllowQr,
+            request.Gui,
+            request.Qr,
             request.AllowFingerprintAuth,
             request.AllowFingerprintSign,
+            request.MobileBankId,
+            request.DesktopBankId,
+            request.ThisDevice,
             request.CallbackUrl,
             request.ReturnUrl,
             request.AuthMessage,
@@ -41,9 +44,14 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
-    // [HttpPost]
-    // public async Task<ActionResult<GetSessionResponse>> Callback(string grandidsession)
-    // {
-        
-    // }
+    [HttpGet("callback")]
+    public async Task<ActionResult<GetSessionResponse>> Callback(string grandIdSession)
+    {
+        var response = await PollSession(new PollSessionRequest
+        {
+            SessionId = grandIdSession
+        });
+
+        return response;
+    }
 }

@@ -6,6 +6,7 @@ builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// use below code to read the api keys from somewhere or put them in appsettings.Local.json or user secrets
 // builder.Services.Configure<GrandIdOptions>(opts =>
 // {
 //     opts.ApiKey = "abc123";
