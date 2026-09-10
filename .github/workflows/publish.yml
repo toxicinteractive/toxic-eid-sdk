@@ -45,7 +45,7 @@ jobs:
         id: version
         run: |
           PACKAGE_VERSION=${{ github.ref_name }}
-          PACKAGE_NAME="Toxic.GrandId.Sdk.$PACKAGE_VERSION.nupkg"
+          PACKAGE_NAME="Toxic.EId.Sdk.$PACKAGE_VERSION.nupkg"
           ARTIFACT_NAME="package-$PACKAGE_VERSION"
 
           echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
@@ -55,13 +55,13 @@ jobs:
       - name: Restore and pack
         run: |
           dotnet restore
-          dotnet pack src/Toxic.GrandId.Sdk --no-restore --configuration Release -p:PackageVersion="${{ steps.version.outputs.PACKAGE_VERSION }}"
+          dotnet pack src/Toxic.EId.Sdk --no-restore --configuration Release -p:PackageVersion="${{ steps.version.outputs.PACKAGE_VERSION }}"
 
       - uses: actions/upload-artifact@v7
         if: ${{ success() }}
         with:
           name: ${{ steps.version.outputs.ARTIFACT_NAME }}
-          path: "src/Toxic.GrandId.Sdk/bin/Release/${{ steps.version.outputs.PACKAGE_NAME }}"
+          path: "src/Toxic.EId.Sdk/bin/Release/${{ steps.version.outputs.PACKAGE_NAME }}"
 
   publish-to-github:
     name: Publish to GitHub

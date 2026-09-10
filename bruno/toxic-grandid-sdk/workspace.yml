@@ -1,10 +1,10 @@
 opencollection: 1.0.0
 info:
-  name: "toxic-grandid-sdk"
+  name: "toxic-eid-sdk"
   type: workspace
 
 collections:
-  - name: "BankId"
+  - name: "BankID"
     path: "collections/BankId"
 
 specs:

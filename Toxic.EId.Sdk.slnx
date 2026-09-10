@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/Toxic.EId.Sdk.SampleApp/Toxic.EId.Sdk.SampleApp.csproj" />
+  <Project Path="src/Toxic.EId.Sdk/Toxic.EId.Sdk.csproj" />
+</Solution>

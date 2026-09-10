@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="src/Toxic.GrandId.Sdk/Toxic.GrandId.Sdk.csproj" />
-  <Project Path="src/Toxic.GrandId.Sdk.SampleApp/Toxic.GrandId.Sdk.SampleApp.csproj" />
-</Solution>

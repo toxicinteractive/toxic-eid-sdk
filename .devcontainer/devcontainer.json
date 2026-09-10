@@ -1,5 +1,5 @@
 {
-  "name": "toxic-bankid-client-aspnet",
+  "name": "toxic-eid-sdk",
   "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
   "features": {
     "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:latest": {}
@@ -17,7 +17,7 @@
         "csharp.experimental.debug.hotReload": true,
         "remote.autoForwardPorts": true,
         "remote.autoForwardPortsSource": "hybrid",
-        "dotnet.defaultSolution": "Toxic.GrandId.Sdk.slnx"
+        "dotnet.defaultSolution": "Toxic.EId.Sdk.slnx"
       }
     }
   },

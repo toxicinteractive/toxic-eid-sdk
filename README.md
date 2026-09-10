@@ -1,11 +1,11 @@
-# Toxic.GrandId.Sdk
-A GrandID (Svensk e-identitet) API implementation.
+# Toxic.EId.Sdk
+An eID (e-identitet.se) API implementation.
 
 ## How to use
-1. Install the nuget `Toxic.GrandId.Sdk`
+1. Install the nuget `Toxic.EId.Sdk`
 2. Specify required options and add the client services:
 ```csharp
-builder.Services.Configure<GrandIdOptions>(opts =>
+builder.Services.Configure<EIdOptions>(opts =>
 {
     // get these from somewhere safe
     opts.ApiKey = "abc123";
