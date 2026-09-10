@@ -17,7 +17,7 @@ http:
         value: "{{service-key}}"
       - name: sessionId
         type: text
-        value: 39f5e6f7a4d333f1ae9e3fcca886bc86
+        value: session-id-here
 
 settings:
   encodeUrl: true
