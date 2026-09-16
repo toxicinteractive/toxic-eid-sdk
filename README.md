@@ -17,4 +17,5 @@ builder.Services.AddBankIdClient();
 3. Inject and use the client wherever you want
 4. Refer to the documentation: https://docs.grandid.com
 
+## Examples
 Check out the "Sandbox" and "Real example" examples in the sample app provided here for implementation details.
