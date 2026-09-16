@@ -1,0 +1,51 @@
+@{
+  ViewData["Title"] = "Real example";
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/real.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/real.js" asp-append-version="true"></script>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div id="root">
+  <div id="pane1" class="pane">
+    <h1>Select identification method</h1>
+    <a id="bankid" class="btn btn-primary" href="">
+      <img class="btn-logo" src="/img/BankID_logo_white.svg" width="50" />
+      <span>Identify with BankID</span>
+    </a>
+  </div>
+
+  <div id="pane2" class="pane">
+    <h1>Identify with BankID</h1>
+    <h2>Open the BankID app and scan the QR code.</h2>
+    <img id="qr" width="196" height="196" />
+    <div id="time-bar"></div>
+    <div id="time-text">5 minutes left</div>
+    <a id="auth-same" class="btn btn-secondary" href="">Open BankID on this device</a>
+  </div>
+
+  <div id="pane3" class="pane">
+    <h1>Complete the identification in the app</h1>
+    <img id="app-img" src="/img/app.png" width="192" />
+    <a id="cancel" class="btn btn-secondary reset" href="">Cancel</a>
+  </div>
+
+  <div id="pane4" class="pane">
+    <img src="/img/error.png" width="192" />
+    <h1>Identification failed</h1>
+    <h2>Failed to scan the QR code.<br />Start the BankID app and scan the QR code.</h2>
+    <a id="try-again" class="btn btn-primary reset" href="">Try again</a>
+  </div>
+
+  <div id="pane5" class="pane">
+    <h1>Identification successful</h1>
+    <h2>Welcome, <span id="username"></span>!</h2>
+    <a id="go-back" class="btn btn-primary reset" href="">Go back</a>
+  </div>
+</div>

@@ -1,10 +1,14 @@
 using Toxic.EId.Sdk;
+using Toxic.EId.Sdk.SampleApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(cfg =>
+{
+    cfg.Filters.Add<TrapExceptionsFilter>();
+});
 
 // use below code to read the api keys from somewhere or put them in appsettings.Local.json or user secrets
 // builder.Services.Configure<EIdOptions>(opts =>
@@ -26,11 +30,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapStaticAssets();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")

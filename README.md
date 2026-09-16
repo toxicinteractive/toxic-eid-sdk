@@ -17,4 +17,4 @@ builder.Services.AddBankIdClient();
 3. Inject and use the client wherever you want
 4. Refer to the documentation: https://docs.grandid.com
 
-For a more high level experience you can use the `Toxic.BankId.Client.AspNet` nuget.
+Check out the "Sandbox" and "Real example" examples in the sample app provided here for implementation details.

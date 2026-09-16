@@ -1,0 +1,32 @@
+.col1 {
+  
+}
+
+.col2 {
+  float: right;
+}
+
+fieldset {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 0 10px 10px 10px;
+  margin: 10px 0;
+}
+
+fieldset legend {
+  float: none;
+  width: auto;
+  font-size: 18px;
+}
+
+input[type=text],textarea,select {
+  width: 350px;
+}
+
+#authenticate,#sign {
+  margin-top: 10px;
+}
+
+label {
+  margin-top: 5px;
+}

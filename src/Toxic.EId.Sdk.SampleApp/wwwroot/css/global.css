@@ -1,0 +1,27 @@
+header {
+  text-align: center;
+}
+
+header > span {
+  font-weight: bold;
+}
+
+header ul {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+header li {
+  display: inline;
+}
+
+header svg {
+  position: relative;
+  top: 4px;
+}
+
+.center {
+  width: 800px;
+  margin: 0 auto;
+}

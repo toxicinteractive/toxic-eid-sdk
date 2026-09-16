@@ -1,6 +1,4 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Toxic.EId.Sdk.SampleApp.Models;
 
 namespace Toxic.EId.Sdk.SampleApp.Controllers;
 
@@ -11,14 +9,15 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    [Route("sandbox")]
+    public IActionResult Sandbox()
     {
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [Route("real")]
+    public IActionResult Real()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View();
     }
 }

@@ -16,7 +16,7 @@ public class AuthController : ControllerBase
     {
         _bankIdClient = bankIdClient;
     }
-    
+
     [HttpPost("create")]
     public async Task<ActionResult<FederatedLoginResponse>> CreateSession(CreateSessionRequest request)
     {
@@ -43,6 +43,13 @@ public class AuthController : ControllerBase
     {
         var response = await _bankIdClient.GetSession(request.SessionId!);
         return Ok(response);
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout(LogoutRequest request)
+    {
+        await _bankIdClient.Logout(request.SessionId!);
+        return Ok();
     }
 
     [HttpGet("callback")]
