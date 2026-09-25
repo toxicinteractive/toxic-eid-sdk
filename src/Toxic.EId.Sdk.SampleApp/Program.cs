@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews(cfg =>
 // {
 //     opts.ApiKey = "abc123";
 //     opts.ServiceKey = "asd";
+//     opts.IsTest = true;
 // });
 builder.Services.AddBankIdClient();
 
