@@ -2,6 +2,8 @@ namespace Toxic.EId.Sdk.SampleApp.Models;
 
 public class CreateSessionRequest
 {
+    public bool IsSigning { get; set; }
+    
     public bool Gui { get; set; }
     public bool Qr { get; set; }
     public bool AllowFingerprintAuth { get; set; }

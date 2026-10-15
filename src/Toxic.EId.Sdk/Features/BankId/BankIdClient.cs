@@ -33,6 +33,7 @@ public partial class BankIdClient : EIdClient
     /// <param name="userVisibleData">Base64 encoded text to be shown to the user when signing.</param>
     /// <param name="userNonVisibleData">Base64 encoded text that will be included in the signing process but invisible to the user.</param>
     /// <param name="userVisibleDataFormat">Can be plaintext or simpleMarkdownV1.</param>
+    /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
     public virtual partial Task<FederatedLoginResponse> FederatedLogin(
         bool gui,
         bool qr,
@@ -46,17 +47,24 @@ public partial class BankIdClient : EIdClient
         string? authMessage = null,
         string? userVisibleData = null,
         string? userNonVisibleData = null,
-        string? userVisibleDataFormat = null);
+        string? userVisibleDataFormat = null,
+        Func<EIdOptions, string?>? serviceKeySelector = null);
 
     /// <summary>
     /// Gets information about an ongoing authentication or signing process.
     /// </summary>
     /// <param name="sessionId">A EId session ID.</param>
-    public virtual partial Task<GetSessionResponse> GetSession(string sessionId);
+    /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    public virtual partial Task<GetSessionResponse> GetSession(
+        string sessionId,
+        Func<EIdOptions, string?> serviceKeySelector);
 
     /// <summary>
     /// Cancels and/or deletes a EId session on the remote side.
     /// </summary>
     /// <param name="sessionId">A EId session ID.</param>
-    public virtual partial Task<LogoutResponse> Logout(string sessionId);
+    /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    public virtual partial Task<LogoutResponse> Logout(
+        string sessionId,
+        Func<EIdOptions, string?> serviceKeySelector);
 }

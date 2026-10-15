@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Models = Toxic.EId.Sdk.Features.BankId.FederatedLogin;
 
 namespace Toxic.EId.Sdk.Features.BankId;
@@ -17,9 +18,13 @@ public partial class BankIdClient
         string? authMessage,
         string? userVisibleData,
         string? userNonVisibleData,
-        string? userVisibleDataFormat)
+        string? userVisibleDataFormat,
+        Func<EIdOptions, string?>? serviceKeySelector)
     {
-        var request = GetRequestObject<Models.EIdRequest>();
+        var serviceKey = serviceKeySelector?.Invoke(Options) ?? 
+            throw new InvalidOperationException("Invalid BankId service key");
+            
+        var request = GetRequestObject<Models.EIdRequest>(serviceKey);
 
         request.Gui = gui;
         request.Qr = qr;

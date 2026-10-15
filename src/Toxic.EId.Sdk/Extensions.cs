@@ -30,12 +30,7 @@ public static class Extensions
                     throw new InvalidOperationException("eId:ApiKey must be specified");
                 }
 
-                if (string.IsNullOrWhiteSpace(options.Value.ServiceKey))
-                {
-                    throw new InvalidOperationException("eId:ServiceKey must be specified");
-                }
-
-                client.BaseAddress = new Uri(options.Value.IsTest ? "https://client-test.grandid.com/json1.1/" : "https://client.grandid.com/json1.1/");
+                client.BaseAddress = new Uri($"{options.Value.Endpoint}/json1.1/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaTypeNames.Application.Json));
             });

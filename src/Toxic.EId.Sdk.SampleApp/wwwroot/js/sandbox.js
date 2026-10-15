@@ -13,6 +13,7 @@ document.querySelector("#authenticate").addEventListener("click", async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      "isSigning": document.querySelector("#userVisibleData").value?.length > 0,
       "userVisibleData": btoa(document.querySelector("#userVisibleData").value),
       "userNonVisibleData": btoa(document.querySelector("#userNonVisibleData").value),
       "userVisibleDataFormat": document.querySelector("#userVisibleDataFormat").value,

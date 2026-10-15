@@ -42,6 +42,7 @@ document.querySelector("#bankid").addEventListener("click", async (e) => {
 
   // create session
   const res = await request("/auth/create", {
+    isSigning: false,
     gui: false,
     qr: true,
     mobileBankId: true,

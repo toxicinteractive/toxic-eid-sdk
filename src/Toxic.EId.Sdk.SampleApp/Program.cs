@@ -10,14 +10,18 @@ builder.Services.AddControllersWithViews(cfg =>
     cfg.Filters.Add<TrapExceptionsFilter>();
 });
 
-// use below code to read the api keys from somewhere or put them in appsettings.Local.json or user secrets
+// get these from somewhere safe (like a key vault) or via environment variables
 // builder.Services.Configure<EIdOptions>(opts =>
 // {
 //     opts.ApiKey = "abc123";
-//     opts.ServiceKey = "asd";
+//     opts.BankId.AuthServiceKey = "abc123";
+//     opts.BankId.SignServiceKey = "abc123";
 //     opts.IsTest = true;
+//     opts.UseEuEndpoint = true;
 // });
 builder.Services.AddBankIdClient();
+
+builder.Services.AddHybridCache();
 
 var app = builder.Build();
 

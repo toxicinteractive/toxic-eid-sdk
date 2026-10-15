@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Hybrid;
 using Toxic.EId.Sdk.Features.BankId;
 using Toxic.EId.Sdk.Features.BankId.FederatedLogin;
 using Toxic.EId.Sdk.Features.BankId.GetSession;
@@ -11,10 +12,12 @@ namespace Toxic.EId.Sdk.SampleApp.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly BankIdClient _bankIdClient;
+    private readonly HybridCache _cache;
 
-    public AuthController(BankIdClient bankIdClient)
+    public AuthController(BankIdClient bankIdClient, HybridCache cache)
     {
         _bankIdClient = bankIdClient;
+        _cache = cache;
     }
 
     [HttpPost("create")]
@@ -33,7 +36,13 @@ public class AuthController : ControllerBase
             request.AuthMessage,
             request.UserVisibleData,
             request.UserNonVisibleData,
-            request.UserVisibleDataFormat);
+            request.UserVisibleDataFormat,
+            serviceKeySelector: options => request.IsSigning ? 
+                options.BankId.SignServiceKey : 
+                options.BankId.AuthServiceKey);
+
+        // remember the service mode for this session (auth or sign)
+        await _cache.SetAsync(response.SessionId!, request.IsSigning);
 
         return Ok(response);
     }
@@ -41,14 +50,28 @@ public class AuthController : ControllerBase
     [HttpPost("poll")]
     public async Task<ActionResult<GetSessionResponse>> PollSession(PollSessionRequest request)
     {
-        var response = await _bankIdClient.GetSession(request.SessionId!);
+        var isSigning = await _cache.GetOrCreateAsync(request.SessionId!, async _ => false);
+
+        var response = await _bankIdClient.GetSession(
+            request.SessionId!, 
+            serviceKeySelector: options => isSigning ? 
+                options.BankId.SignServiceKey : 
+                options.BankId.AuthServiceKey);
+
         return Ok(response);
     }
 
     [HttpPost("logout")]
     public async Task<IActionResult> Logout(LogoutRequest request)
     {
-        await _bankIdClient.Logout(request.SessionId!);
+        var isSigning = await _cache.GetOrCreateAsync(request.SessionId!, async _ => false);
+
+        await _bankIdClient.Logout(
+            request.SessionId!, 
+            serviceKeySelector: options => isSigning ? 
+                options.BankId.SignServiceKey : 
+                options.BankId.AuthServiceKey);
+
         return Ok();
     }
 
@@ -60,7 +83,13 @@ public class AuthController : ControllerBase
             SessionId = grandIdSession
         });
 
-        await _bankIdClient.Logout(grandIdSession);
+        var isSigning = await _cache.GetOrCreateAsync(grandIdSession, async _ => false);
+
+        await _bankIdClient.Logout(
+            grandIdSession, 
+            serviceKeySelector: options => isSigning ? 
+                options.BankId.SignServiceKey : 
+                options.BankId.AuthServiceKey);
 
         return response;
     }
