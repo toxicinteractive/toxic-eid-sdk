@@ -14,7 +14,7 @@ builder.Services.Configure<EIdOptions>(opts =>
 
 builder.Services.AddBankIdClient();
 ```
-3. Inject and use the client wherever you want
+3. Inject and use the `BankIdClient` wherever you want
 4. Refer to the documentation: https://docs.grandid.com
 
 ## Examples
