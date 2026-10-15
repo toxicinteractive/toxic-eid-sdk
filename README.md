@@ -7,7 +7,7 @@ An eID (e-identitet.se) API implementation.
 ```csharp
 builder.Services.Configure<EIdOptions>(opts =>
 {
-    // get these from somewhere safe
+    // get these from somewhere safe or via environment variables
     opts.ApiKey = "abc123";
     opts.ServiceKey = "abc123";
 });
