@@ -25,5 +25,6 @@
     "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true",
     "DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER": "true",
     "TZ": "Europe/Stockholm"
-  }
+  },
+  "postCreateCommand": "dotnet tool install -g dotnet-outdated-tool"
 }
