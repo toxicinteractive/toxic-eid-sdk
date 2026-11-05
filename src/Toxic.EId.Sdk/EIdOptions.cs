@@ -13,7 +13,7 @@ public class EIdOptions
     public bool IsTest { get; set; }
 
     /// <summary>
-    /// Set to true to use EU endpoint instead of SE endpoints.
+    /// Set to true to use EU endpoint instead of SE endpoint.
     /// </summary>
     public bool UseEuEndpoint { get; set; }
 
@@ -24,7 +24,12 @@ public class BankIdOptions
 {
     [Required]
     public string? AuthServiceKey { get; set; }
+    public string? SignServiceKey { get; set; }
+}
 
+public class FrejaEIdOptions
+{
     [Required]
+    public string? AuthServiceKey { get; set; }
     public string? SignServiceKey { get; set; }
 }

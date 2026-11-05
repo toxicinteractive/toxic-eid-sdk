@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using Models = Toxic.EId.Sdk.Features.BankId.FederatedLogin;
 
 namespace Toxic.EId.Sdk.Features.BankId;
@@ -6,6 +5,7 @@ namespace Toxic.EId.Sdk.Features.BankId;
 public partial class BankIdClient
 {
     public virtual async partial Task<Models.FederatedLoginResponse> FederatedLogin(
+        Func<EIdOptions, string?> serviceKeySelector,
         bool gui,
         bool qr,
         bool allowFingerPrintAuth,
@@ -18,8 +18,7 @@ public partial class BankIdClient
         string? authMessage,
         string? userVisibleData,
         string? userNonVisibleData,
-        string? userVisibleDataFormat,
-        Func<EIdOptions, string?>? serviceKeySelector)
+        string? userVisibleDataFormat)
     {
         var serviceKey = serviceKeySelector?.Invoke(Options) ?? 
             throw new InvalidOperationException("Invalid BankId service key");
