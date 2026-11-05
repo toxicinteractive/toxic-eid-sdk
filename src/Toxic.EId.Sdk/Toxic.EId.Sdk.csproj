@@ -10,10 +10,10 @@
     
     <IsPackable>true</IsPackable>
     <PackageId>Toxic.EId.Sdk</PackageId>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <Company>Toxic Interactive Solutions</Company>
-    <PackageTags>BankID;eID</PackageTags>
-    <Description>An eID (e-identitet.se) API implementation.</Description>
+    <PackageTags>BankID;Freja eID;eID</PackageTags>
+    <Description>An eID (e-identitet.se) API implementation for BankID and Freja eID.</Description>
     <RepositoryUrl>https://github.com/toxicinteractive/toxic-eid-sdk</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
