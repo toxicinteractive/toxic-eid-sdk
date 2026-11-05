@@ -1,13 +1,13 @@
 @{
-  ViewData["Title"] = "Real example";
+  ViewData["Title"] = "Real example (BankID)";
 }
 
 @section Styles {
-  <link rel="stylesheet" href="~/css/real.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/bankid-real.css" asp-append-version="true" />
 }
 
 @section Scripts {
-  <script src="~/js/real.js" asp-append-version="true"></script>
+  <script src="~/js/bankid-real.js" asp-append-version="true"></script>
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -32,12 +32,12 @@
 
   <div id="pane3" class="pane">
     <h1>Complete the identification in the app</h1>
-    <img id="app-img" src="/img/app.png" width="192" />
+    <img id="app-img" src="/img/bankid-app.png" width="192" />
     <a id="cancel" class="btn btn-secondary reset" href="">Cancel</a>
   </div>
 
   <div id="pane4" class="pane">
-    <img src="/img/error.png" width="192" />
+    <img src="/img/bankid-error.png" width="192" />
     <h1>Identification failed</h1>
     <h2>Failed to scan the QR code.<br />Start the BankID app and scan the QR code.</h2>
     <a id="try-again" class="btn btn-primary reset" href="">Try again</a>

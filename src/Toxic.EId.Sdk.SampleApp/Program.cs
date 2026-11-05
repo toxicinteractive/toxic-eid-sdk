@@ -11,15 +11,15 @@ builder.Services.AddControllersWithViews(cfg =>
 });
 
 // get these from somewhere safe (like a key vault) or via environment variables
+// for more options check the EIdOptions class
 // builder.Services.Configure<EIdOptions>(opts =>
 // {
 //     opts.ApiKey = "abc123";
 //     opts.BankId.AuthServiceKey = "abc123";
 //     opts.BankId.SignServiceKey = "abc123";
-//     opts.IsTest = true;
-//     opts.UseEuEndpoint = true;
 // });
 builder.Services.AddBankIdClient();
+builder.Services.AddFrejaEIdClient();
 
 builder.Services.AddHybridCache();
 

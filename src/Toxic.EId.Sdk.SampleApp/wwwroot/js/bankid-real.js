@@ -1,5 +1,5 @@
 /**
- * This is an example of a more realistic authentication flow in line with the official BankID recommendations: 
+ * This is an example of a realistic BankID authentication flow in line with the official BankID recommendations: 
  * https://developers.bankid.com/ui-resources/ui-desktop
  * 
  * Note that in this example the backend returns all the user's data upon successful authentication, unfiltered.
@@ -37,7 +37,7 @@ document.querySelector("#bankid").addEventListener("click", async (e) => {
 
   shouldCancel = false;
   delete root.dataset.sessionId;
-  delete root.dataset.autoStartToken;
+  delete root.dataset.refToken;
   document.querySelector("#username").innerText = "";
 
   // create session
@@ -55,7 +55,7 @@ document.querySelector("#bankid").addEventListener("click", async (e) => {
 
   qr.src = `data:image/svg+xml;base64,${res.qrCode}`;
   root.dataset.sessionId = res.sessionId;
-  root.dataset.autoStartToken = res.autoStartToken;
+  root.dataset.refToken = res.refToken;
 
   // start polling for status
   poll(res.sessionId);
@@ -69,7 +69,7 @@ document.querySelector("#auth-same").addEventListener("click", async (e) => {
   switchPane(3);
 
   // open the BankID app
-  window.location = `https://app.bankid.com/?autostarttoken=${root.dataset.autoStartToken}`;
+  window.location = `https://app.bankid.com/?autostarttoken=${root.dataset.refToken}`;
 
   // start polling for status
   poll(res.sessionId);
@@ -120,7 +120,7 @@ const poll = async (sessionId) => {
     qr.src = `data:image/svg+xml;base64,${res.qrCode}`;
 
     // user has opened the app
-    if (res.hintCode == "userSign") {
+    if (res.statusMessage == "userSign") {
       switchPane(3);
     }
 

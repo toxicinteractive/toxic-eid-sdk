@@ -30,14 +30,14 @@ internal class EIdResponse : EIdResponseBase
             SessionId = SessionId,
             QrCode = QrCode,
             RedirectUrl = RedirectUrl,
-            AutoStartToken = AutoStartToken
+            RefToken = AutoStartToken
         };
 }
 
-public class FederatedLoginResponse
+public class FederatedLoginResponse : IFederatedLoginResponse
 {
     public string? SessionId { get; init; }
     public string? QrCode { get; init; }
     public string? RedirectUrl { get; init; }
-    public string? AutoStartToken { get; init; }
+    public string? RefToken { get; init; }
 }

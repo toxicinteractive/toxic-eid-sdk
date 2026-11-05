@@ -1,4 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Buffers;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Logging;
 using Toxic.EId.Sdk.Features;
 
@@ -26,7 +29,7 @@ public abstract partial class EIdClient
         where TRequest : EIdRequestBase
         where TResponse : EIdResponseBase
     {
-        if (Logger.IsEnabled(LogLevel.Debug))
+        if (Logger.IsEnabled(LogLevel.Debug) && Options.LogRequestData)
         {
             Logger.LogDebug("Raw request to {Host}{Endpoint}: {Request}", _httpClient.BaseAddress, endpoint, JsonSerializer.Serialize(request));
         }
@@ -37,7 +40,7 @@ public abstract partial class EIdClient
 
         var contents = await httpResponse.Content.ReadAsStringAsync();
 
-        if (Logger.IsEnabled(LogLevel.Debug))
+        if (Logger.IsEnabled(LogLevel.Debug) && Options.LogRequestData)
         {
             Logger.LogDebug("Raw response from {Host}{Endpoint}: {Message}", _httpClient.BaseAddress, endpoint, contents);
         }

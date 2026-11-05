@@ -1,5 +1,5 @@
 ﻿/**
- * This is a non-realistic sandbox sample with all available parameters.
+ * This is a sandbox sample with all available parameters for the BankID API.
  * Check out the "realistic" sample for a more reasonable experience.
  */
 
@@ -7,15 +7,15 @@ document.querySelector("#authenticate").addEventListener("click", async () => {
   document.querySelector("#qrImg").style.display = "none";
   document.querySelector("#result").style.display = "none";
 
-  const response = await fetch("/auth/create", {
+  const response = await fetch("/auth/bankid/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       "isSigning": document.querySelector("#userVisibleData").value?.length > 0,
-      "userVisibleData": btoa(document.querySelector("#userVisibleData").value),
-      "userNonVisibleData": btoa(document.querySelector("#userNonVisibleData").value),
+      "userVisibleData": document.querySelector("#userVisibleData").value,
+      "userNonVisibleData": document.querySelector("#userNonVisibleData").value,
       "userVisibleDataFormat": document.querySelector("#userVisibleDataFormat").value,
       "gui": document.querySelector("#gui").checked,
       "qr": document.querySelector("#qr").checked,
@@ -44,8 +44,8 @@ document.querySelector("#authenticate").addEventListener("click", async () => {
     document.querySelector("#qrImg").src = `data:image/svg+xml;base64,${data.qrCode}`;
     document.querySelector("#qrImg").style.display = "block";
     poll(data.sessionId);
-  } else if (data.autoStartToken) {
-    window.location = `https://app.bankid.com/?autostarttoken=${data.autoStartToken}`;
+  } else if (data.refToken) {
+    window.location = `https://app.bankid.com/?autostarttoken=${data.refToken}`;
   } else {
     document.querySelector("#result").innerText = "Unknown error, check console.";
     document.querySelector("#result").style.display = "block";
@@ -53,7 +53,7 @@ document.querySelector("#authenticate").addEventListener("click", async () => {
 });
 
 const poll = async (sessionId) => {
-  const response = await fetch("/auth/poll", {
+  const response = await fetch("/auth/bankid/poll", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -70,14 +70,16 @@ const poll = async (sessionId) => {
     document.querySelector("#result").innerText = JSON.stringify(data.userAttributes, null, 2);
     document.querySelector("#result").style.display = "block";
   } else if (data.isPending && data.qrCode) {
-    document.querySelector("#result").style.display = "none";
-    document.querySelector("#result").innerText = "";
+    document.querySelector("#result").style.display = "block";
+    document.querySelector("#result").innerText = `${data.status}: ${data.statusMessage}`;
+
+    // for bankid the qr code is updated on every response from GetSession
     document.querySelector("#qrImg").src = `data:image/svg+xml;base64,${data.qrCode}`;
     document.querySelector("#qrImg").style.display = "block";
     setTimeout(async () => await poll(sessionId), 2000);
   } else {
     document.querySelector("#qrImg").style.display = "none";
-    document.querySelector("#result").innerText = `Error: ${data.hintCode}`;
+    document.querySelector("#result").innerText = `Error: ${data.status} - ${data.statusMessage}`;
     document.querySelector("#result").style.display = "block";
   }
 };

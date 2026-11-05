@@ -14,7 +14,7 @@ internal class EIdResponse : EIdResponseBase
         new()
         {
             Status = GrandIdObject?.Message?.Status,
-            HintCode = GrandIdObject?.Message?.HintCode,
+            StatusMessage = GrandIdObject?.Message?.HintCode,
             SessionId = GrandIdObject?.SessionId,
             QrCode = GrandIdObject?.QrCode,
             AutoStartToken = GrandIdObject?.AutoStartToken,
@@ -38,23 +38,23 @@ internal class MessageObject
     public string? HintCode { get; init; }
 }
 
-public class GetSessionResponse
+public class GetSessionResponse : IGetSessionResponse
 {
     public bool IsCompleted => UserAttributes != null;
     public bool IsPending => Status == "pending";
     public bool HasError => Status == "failed";
 
     public string? Status { get; init; }
-    public string? HintCode { get; init; }
+    public string? StatusMessage { get; init; }
 
     public string? SessionId { get; init; }
     public string? QrCode { get; init; }
     public string? AutoStartToken { get; init; }
 
-    public UserAttributes? UserAttributes { get; init; }
+    public IUserAttributes? UserAttributes { get; init; }
 }
 
-public class UserAttributes
+public class UserAttributes : IUserAttributes
 {
     public string? PersonalNumber { get; init; }
     public string? Name { get; init; }
