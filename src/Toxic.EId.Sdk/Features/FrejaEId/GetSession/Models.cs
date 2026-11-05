@@ -10,7 +10,7 @@ internal class EIdRequest : EIdRequestBase
 
 internal class EIdResponse : EIdResponseBase
 {
-    public GrandIdObject? GrandIdObject { get; init; } // TODO?
+    public GrandIdObject? GrandIdObject { get; init; }
 
     public StatusObject? StatusObject { get; init; }
     public UserAttributes? UserAttributes { get; init; }
