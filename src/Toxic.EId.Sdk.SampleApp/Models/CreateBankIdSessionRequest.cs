@@ -1,6 +1,6 @@
 namespace Toxic.EId.Sdk.SampleApp.Models;
 
-public class CreateSessionRequest
+public class CreateBankIdSessionRequest
 {
     public bool IsSigning { get; set; }
     

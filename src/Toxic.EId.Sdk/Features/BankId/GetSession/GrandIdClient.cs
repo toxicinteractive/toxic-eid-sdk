@@ -5,8 +5,8 @@ namespace Toxic.EId.Sdk.Features.BankId;
 public partial class BankIdClient
 {
     public virtual async partial Task<Models.GetSessionResponse> GetSession(
-        string sessionId,
-        Func<EIdOptions, string?> serviceKeySelector)
+        Func<EIdOptions, string?> serviceKeySelector,
+        string sessionId)
     {
         var serviceKey = serviceKeySelector?.Invoke(Options) ?? 
             throw new InvalidOperationException("Invalid BankId service key");

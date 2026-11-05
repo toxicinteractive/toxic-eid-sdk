@@ -9,14 +9,26 @@ public class HomeController : Controller
         return View();
     }
 
-    [Route("sandbox")]
-    public IActionResult Sandbox()
+    [Route("bankid-sandbox")]
+    public IActionResult BankIdSandbox()
     {
         return View();
     }
 
-    [Route("real")]
-    public IActionResult Real()
+    [Route("bankid-real")]
+    public IActionResult BankIdReal()
+    {
+        return View();
+    }
+
+    [Route("freja-sandbox")]
+    public IActionResult FrejaEIdSandbox()
+    {
+        return View();
+    }
+
+    [Route("freja-real")]
+    public IActionResult FrejaEIdReal()
     {
         return View();
     }

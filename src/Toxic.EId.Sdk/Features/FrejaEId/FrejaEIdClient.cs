@@ -32,13 +32,13 @@ public partial class FrejaEIdClient : EIdClient
     /// <param name="enableAutoLaunch">Set to true to automatically launch the Freja eID app on the current device.</param>
     /// <param name="personalNumber">Used as input for the corresponding user info type.</param>
     /// <param name="callbackUrl">Used to receive a completed session id when the user is authenticating via the eID redirection method (gui).</param>
-    /// <param name="userVisibleData">Base64 encoded text to be shown to the user when signing.</param>
-    /// <param name="userNonVisibleData">Base64 encoded text that will be included in the signing process but invisible to the user.</param>
-    /// <param name="title">Base64 encoded title to show when signing.</param>
+    /// <param name="userVisibleData">Text to be shown to the user when signing. Will be base64 encoded.</param>
+    /// <param name="userNonVisibleData">Text that will be included in the signing process but invisible to the user. Will be base64 encoded.</param>
+    /// <param name="title">Title to show when signing. Will be base64 encoded.</param>
     /// <param name="userInfo">Input data corresponding to the user info type.</param>
     /// <param name="countryCode">2-letter country code for when a personal number is provided and is not issued in Sweden.</param>
-    /// <param name="pushNotification">Base64 encoded text to display in push notification to the user.</param>
-    /// <param name="customerUrl">Used as a link in the GUI mode to link back to the web page.</param>
+    /// <param name="pushNotification">Text to display in push notification to the user. Will be base64 encoded.</param>
+    /// <param name="customerUrl">URL used as a link in the GUI mode to link back to the web page. Will be base64 encoded.</param>
     /// <returns></returns>
     public virtual partial Task<FederatedLoginResponse> FederatedLogin(
         Func<EIdOptions, string?> serviceKeySelector,
@@ -63,29 +63,30 @@ public partial class FrejaEIdClient : EIdClient
     /// <summary>
     /// Gets information about an ongoing authentication or signing process.
     /// </summary>
-    /// <param name="sessionId">A EId session ID.</param>
     /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    /// <param name="sessionId">A EId session ID.</param>
     public virtual partial Task<GetSessionResponse> GetSession(
-        string sessionId,
-        Func<EIdOptions, string?> serviceKeySelector);
+        Func<EIdOptions, string?> serviceKeySelector,
+        string sessionId);
 
     /// <summary>
     /// Cancels and/or deletes an eID session on the remote side.
     /// </summary>
-    /// <param name="sessionId">An eID session ID.</param>
     /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    /// <param name="sessionId">An eID session ID.</param>
     public virtual partial Task<LogoutResponse> Logout(
-        string sessionId,
-        Func<EIdOptions, string?> serviceKeySelector);
+        Func<EIdOptions, string?> serviceKeySelector,
+        string sessionId);
 }
 
+/// <summary>
+/// To use INFERRED (QR), enable the qr parameter and omit personal number.
+/// </summary>
 public enum UserInfoType
 {
-    Inferred,
     Email,
     Phone,
-    Ssn,
-    Upi
+    Ssn
 }
 
 public enum RegistrationLevel
@@ -93,4 +94,12 @@ public enum RegistrationLevel
     Basic,
     Extended,
     Plus
+}
+
+public static class StatusCodes
+{
+    public const string Started = "STARTED";
+    public const string Delivered = "DELIVERED_TO_MOBILE";
+    public const string Cancelled = "CANCELED";
+    public const string Expired = "EXPIRED";
 }

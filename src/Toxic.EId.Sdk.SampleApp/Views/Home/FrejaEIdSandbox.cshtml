@@ -1,0 +1,73 @@
+@{
+    ViewData["Title"] = "Sandbox (Freja eID)";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/freja-sandbox.css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/freja-sandbox.js" asp-append-version="true"></script>
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>Refer to the <a href="https://docs.grandid.com/freja">eID Freja eID documentation</a> for an explanation of the parameters.</p>
+<p>No values need to be base64 encoded in advance.</p>
+<div class="col2">
+  <fieldset>
+    <legend>Sign options</legend>
+    <label for="title">title</label><br />
+    <input type="text" id="title" value="" /><br />
+    <label for="pushNotification">pushNotification</label><br />
+    <input type="text" id="pushNotification" value="" /><br />
+    <label for="userVisibleData">userVisibleData</label><br />
+    <textarea id="userVisibleData"></textarea><br />
+    <label for="userNonVisibleData">userNonVisibleData</label><br />
+    <input type="text" id="userNonVisibleData" value="" /><br />
+  </fieldset>
+  <br />
+  <fieldset>
+    <legend>Device mode</legend>
+    <label for="thisDevice"><input type="checkbox" id="thisDevice" value="thisDevice" />thisDevice</label><br />
+    <label for="otherDevice"><input type="checkbox" id="otherDevice" value="otherDevice" />otherDevice</label><br />
+    <label for="deviceChoice"><input type="checkbox" id="deviceChoice" value="deviceChoice" />deviceChoice</label><br />
+    <label for="enableAutoLaunch"><input type="checkbox" id="enableAutoLaunch" value="enableAutoLaunch" />enableAutoLaunch</label><br />
+  </fieldset>
+</div>
+<div class="col1">
+  <fieldset>
+    <legend>Authenticate options</legend>
+    <label for="minRegistrationLevel">minRegistrationLevel</label><br />
+    <select id="minRegistrationLevel">
+      <option value="BASIC">BASIC</option>
+      <option value="EXTENDED">EXTENDED</option>
+      <option value="PLUS">PLUS</option>
+    </select><br />
+    <label for="userInfoType">userInfoType</label><br />
+    <select id="userInfoType">
+      <option value="EMAIL">EMAIL</option>
+      <option value="PHONE">PHONE</option>
+      <option value="SSN">SSN</option>
+    </select><br />
+    <label for="userInfo">userInfo</label><br />
+    <input type="text" id="userInfo" value="" /><br />
+    <label for="personalNumber">personalNumber</label><br />
+    <input type="text" id="personalNumber" value="" /><br />
+    <label for="countryCode">countryCode</label><br />
+    <input type="text" id="countryCode" value="" /><br />
+  </fieldset>
+  <br />
+  <fieldset>
+    <legend>Gui options</legend>
+    <label for="gui"><input type="checkbox" id="gui" value="gui" />gui</label><br />
+    <label for="qr"><input type="checkbox" id="qr" value="qr" />qr</label><br />
+    <label for="callbackUrl">callbackUrl</label><br />
+    <input type="text" id="callbackUrl" value="https://localhost:7271/auth/freja/callback" /><br />
+    <label for="customerUrl">customerUrl</label><br />
+    <input type="text" id="customerUrl" value="https://localhost:7271" /><br />
+  </fieldset>
+</div>
+<br />
+<img id="qrImg" style="display:none" />
+<pre id="result" style="display:none"></pre>
+<button id="authenticate">Authenticate/sign with Freja eID</button>

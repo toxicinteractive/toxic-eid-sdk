@@ -31,9 +31,9 @@ public partial class BankIdClient : EIdClient
     /// <param name="thisDevice">Set to true to allow the user to authenticate or sign using their current device.</param>
     /// <param name="callbackUrl">Used to receive a completed session id when the user is authenticating via the eID redirection method (gui).</param>
     /// <param name="returnUrl">Used to redirect the user from the BankID app after successful authentication.</param>
-    /// <param name="authMessage">Base64 encoded message to be shown to the user when authenticating.</param>
-    /// <param name="userVisibleData">Base64 encoded text to be shown to the user when signing.</param>
-    /// <param name="userNonVisibleData">Base64 encoded text that will be included in the signing process but invisible to the user.</param>
+    /// <param name="authMessage">Message to be shown to the user when authenticating. Will be base64 encoded.</param>
+    /// <param name="userVisibleData">Text to be shown to the user when signing. Will be base64 encoded.</param>
+    /// <param name="userNonVisibleData">Text that will be included in the signing process but invisible to the user. Will be base64 encoded.</param>
     /// <param name="userVisibleDataFormat">Can be plaintext or simpleMarkdownV1.</param>
     public virtual partial Task<FederatedLoginResponse> FederatedLogin(
         Func<EIdOptions, string?> serviceKeySelector,
@@ -54,18 +54,18 @@ public partial class BankIdClient : EIdClient
     /// <summary>
     /// Gets information about an ongoing authentication or signing process.
     /// </summary>
-    /// <param name="sessionId">An eID session ID.</param>
     /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    /// <param name="sessionId">An eID session ID.</param>
     public virtual partial Task<GetSessionResponse> GetSession(
-        string sessionId,
-        Func<EIdOptions, string?> serviceKeySelector);
+        Func<EIdOptions, string?> serviceKeySelector,
+        string sessionId);
 
     /// <summary>
     /// Cancels and/or deletes an eID session on the remote side.
     /// </summary>
-    /// <param name="sessionId">An eID session ID.</param>
     /// <param name="serviceKeySelector">Provide an auth service key or sign service key depending on the mode chosen.</param>
+    /// <param name="sessionId">An eID session ID.</param>
     public virtual partial Task<LogoutResponse> Logout(
-        string sessionId,
-        Func<EIdOptions, string?> serviceKeySelector);
+        Func<EIdOptions, string?> serviceKeySelector,
+        string sessionId);
 }

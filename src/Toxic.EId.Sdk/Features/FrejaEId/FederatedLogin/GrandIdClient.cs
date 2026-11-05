@@ -29,8 +29,8 @@ public partial class FrejaEIdClient : EIdClient
             
         var request = GetRequestObject<Models.EIdRequest>(serviceKey);
 
-        request.UserInfoType = userInfoType;
-        request.MinRegistrationLevel = minRegistrationLevel;
+        request.UserInfoType = userInfoType.ToString().ToUpperInvariant();
+        request.MinRegistrationLevel = minRegistrationLevel.ToString().ToUpperInvariant();
         request.Gui = gui;
         request.Qr = qr;
         request.ThisDevice = thisDevice;
@@ -39,13 +39,13 @@ public partial class FrejaEIdClient : EIdClient
         request.EnableAutoLaunch = enableAutoLaunch;
         request.PersonalNumber = personalNumber;
         request.CallbackUrl = callbackUrl;
-        request.UserVisibleData = userVisibleData;
-        request.UserNonVisibleData = userNonVisibleData;
-        request.Title = title;
+        request.UserVisibleData = userVisibleData?.ToBase64();
+        request.UserNonVisibleData = userNonVisibleData?.ToBase64();
+        request.Title = title?.ToBase64();
         request.UserInfo = userInfo;
         request.CountryCode = countryCode;
-        request.PushNotification = pushNotification;
-        request.CustomerUrl = customerUrl;
+        request.PushNotification = pushNotification?.ToBase64();
+        request.CustomerUrl = customerUrl?.ToBase64();
 
         var response = await Call<Models.EIdRequest, Models.EIdResponse>("FederatedLogin", request);
         return response.ToEntity();

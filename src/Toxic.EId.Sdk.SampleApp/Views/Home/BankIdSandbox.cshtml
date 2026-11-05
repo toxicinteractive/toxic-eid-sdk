@@ -1,17 +1,18 @@
 @{
-    ViewData["Title"] = "Sandbox";
+    ViewData["Title"] = "Sandbox (BankID)";
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/sandbox.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bankid-sandbox.css" asp-append-version="true" />
 }
 
 @section Scripts {
-    <script src="~/js/sandbox.js" asp-append-version="true"></script>
+    <script src="~/js/bankid-sandbox.js" asp-append-version="true"></script>
 }
 
 <h1>@ViewData["Title"]</h1>
-<p>Refer to the <a href="https://docs.grandid.com">eID documentation</a> for an explanation of the parameters.</p>
+<p>Refer to the <a href="https://docs.grandid.com/bankid">eID BankID documentation</a> for an explanation of the parameters.</p>
+<p>No values need to be base64 encoded in advance.</p>
 <div class="col2">
   <fieldset>
     <legend>Authenticate options</legend>
@@ -40,7 +41,7 @@
     <label for="allowFingerPrintAuth"><input type="checkbox" id="allowFingerPrintAuth" value="allowFingerPrintAuth" />allowFingerPrintAuth</label><br />
     <label for="allowFingerPrintSign"><input type="checkbox" id="allowFingerPrintSign" value="allowFingerPrintSign" />allowFingerPrintSign</label><br />
     <label for="callbackUrl">callbackUrl</label><br />
-    <input type="text" id="callbackUrl" value="https://localhost:7271/auth/callback" />
+    <input type="text" id="callbackUrl" value="https://localhost:7271/auth/bankid/callback" />
   </fieldset>
   <br />
   <fieldset>

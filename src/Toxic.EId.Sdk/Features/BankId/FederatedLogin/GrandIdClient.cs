@@ -34,9 +34,9 @@ public partial class BankIdClient
         request.ThisDevice = thisDevice;
         request.CallbackUrl = callbackUrl;
         request.ReturnUrl = returnUrl;
-        request.AuthMessage = authMessage;
-        request.UserVisibleData = userVisibleData;
-        request.UserNonVisibleData = userNonVisibleData;
+        request.AuthMessage = authMessage?.ToBase64();
+        request.UserVisibleData = userVisibleData?.ToBase64();
+        request.UserNonVisibleData = userNonVisibleData?.ToBase64();
         request.UserVisibleDataFormat = userVisibleDataFormat;
 
         var response = await Call<Models.EIdRequest, Models.EIdResponse>("FederatedLogin", request);
